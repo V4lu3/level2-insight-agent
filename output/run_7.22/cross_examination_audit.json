@@ -1,0 +1,1510 @@
+{
+  "summary": {
+    "total": 100,
+    "confirmed": 28,
+    "overridden": 72,
+    "tier2_expanded": 79
+  },
+  "records": {
+    "688569.SH": {
+      "stock_code": "688569.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3425,
+        "量化": 0.2724,
+        "散户": 0.3851
+      },
+      "confidence_margin": 0.0426,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛置信度极低（Margin=0.043），且初判为散户存在严重物理悖论。证据显示：1. l1_pd_return_skew (+4.49) 与 l1_pb_price_jump_max (+2.60) 表明价格呈现极度右偏分布并伴随显著向上跳空，具备主动定价权，排除散户；2. l1_obp_ask_skew_mean (+2.56) 显示卖盘挂单严重失衡/陡峭，配合 l1_pi_close_rush_amount_pct (+2.57) 的尾盘急量，符合游资尾盘抢筹或撬板行为；3. l1_cb_cancel_imbalance (-3.40) 提示撤单行为异常，虽有一定量化特征，但结合 l3_jump_max (+2.89) 的极大跳跃风险及 dq_missing_trade_ratio (+3.36) 的成交稀疏，更符合游资大单冲击导致的盘口真空与局部失衡，而非量化高频对倒的连续做市特征。综上，微观因果链条强烈指向游资主导。",
+      "evidence_chain": "l1_pd_return_skew(z=+4.49)；l1_cb_cancel_imbalance(z=-3.40)；dq_missing_trade_ratio(z=+3.36)"
+    },
+    "600153.SH": {
+      "stock_code": "600153.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4418,
+        "量化": 0.2524,
+        "散户": 0.3057
+      },
+      "confidence_margin": 0.1361,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.136)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "主动买盘OFI正向比率(z=+3.46)；l1_kl_lower_shadow_ratio(z=+2.74)；l1_kl_doji_score(z=+2.69)"
+    },
+    "688472.SH": {
+      "stock_code": "688472.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4367,
+        "量化": 0.3233,
+        "散户": 0.24
+      },
+      "confidence_margin": 0.1134,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.113)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "盘口累积净买入冲量(z=-2.46)；l1_kl_gap_ratio(z=-2.22)；l1_obpi_mean(z=+2.10)"
+    },
+    "600519.SH": {
+      "stock_code": "600519.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3494,
+        "量化": 0.2494,
+        "散户": 0.4012
+      },
+      "confidence_margin": 0.0517,
+      "verdict": "OVERRIDDEN",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": false,
+      "override_reason": "初判模型受Z-Score高离群值误导判为散户，但物理定律明确散户无主导对倒清洗与大单成交能力。证据显示 l1_oss_big_amount_pct (Z=+5.70) 与 l1_yz_big_pct (Z=+5.32) 极高，且伴随高撤单挂单成交比 (Z=+4.91)，符合量化算法高频挂撤、对倒做市及算法拆单特征，而非散户的自然交易行为。",
+      "evidence_chain": "l1_obp_mid_price_mean(z=+9.28)；成交量加权平均价偏离(z=+9.27)；l1_wavg_spread_std(z=+9.01)"
+    },
+    "603049.SH": {
+      "stock_code": "603049.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.303,
+        "量化": 0.2712,
+        "散户": 0.4258
+      },
+      "confidence_margin": 0.1227,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛倾向于散户，但微观盘口证据强烈违背散户行为物理定律。首先，l1_volume_total_log (Z=-2.39) 与 l1_txn_count_log (Z=-2.04) 显示成交量与交易笔数处于极低分位，排除了游资突发大单脉冲或散户高频挂撤的可能。其次，l1_kl_doji_score (Z=+2.69) 与 l1_kl_lower_shadow_ratio (Z=+2.36) 表明K线呈现极度特殊的长下影线或十字星形态，且 l1_swp_quote_sweep_ratio (Z=-1.71) 显示扫单比例极低，说明价格并非由市场主动买卖驱动，而是由挂单侧控制。最关键的是 l4_rand_symbol_entropy (Z=+1.85) 委托符号序列信息熵显著偏高，配合低成交量的 K 线异常，符合量化算法在非活跃时段进行对倒清洗、高频挂撤以维持价差或测试流动性的特征。散户缺乏对倒清洗能力，游资必然伴随放量，故修正为量化。",
+      "evidence_chain": "l1_kl_doji_score(z=+2.69)；l1_volume_total_log(z=-2.39)；l1_amount_total_log(z=-2.38)"
+    },
+    "688750.SH": {
+      "stock_code": "688750.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.2919,
+        "量化": 0.3202,
+        "散户": 0.3879
+      },
+      "confidence_margin": 0.0677,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.068)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_micro_concentration_top10(z=+1.92)；l1_obpi_mean(z=-1.91)；l1_obp_ask_skew_mean(z=+1.84)"
+    },
+    "688281.SH": {
+      "stock_code": "688281.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.2927,
+        "量化": 0.258,
+        "散户": 0.4493
+      },
+      "confidence_margin": 0.1566,
+      "verdict": "REJECTED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": false,
+      "override_reason": "初判违背微观物理守恒定律。散户行为特征应表现为低熵、低撤单率及缺乏算法节奏，但本案证据显示委托符号序列信息熵极高(Z=+1.79)且总撤单笔数占比显著偏离(Z=+1.80)，这是典型的算法拆单与高频挂撤(T+0套利或做市策略)特征。同时，大单撤单占比高(Z=+1.41)与成交量对数低(Z=-1.47)并存，表明主力资金通过大量虚假委托制造深度假象(Spoofing)以测试流动性或诱导对手盘，而实际净成交量低迷，符合量化高频策略的‘高频挂撤、低实成’物理指纹。游资虽有大单，但无法解释如此高熵的随机序列与极高的撤单频率，故修正为量化。",
+      "evidence_chain": "总撤单笔数占比(z=+1.80)；委托符号序列信息熵(z=+1.79)；l1_pd_up_ratio(z=+1.76)"
+    },
+    "603993.SH": {
+      "stock_code": "603993.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.424,
+        "量化": 0.3364,
+        "散户": 0.2396
+      },
+      "confidence_margin": 0.0876,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛处于边界(Margin=0.088)，经全量特征复审倾向于支撑游资假说。",
+      "evidence_chain": "enh_ofi_x_buy(z=-7.38)；订单流不平衡均值(OFI)(z=-7.24)；l1_pd_price_jump_count(z=+4.84)"
+    },
+    "601126.SH": {
+      "stock_code": "601126.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3895,
+        "量化": 0.259,
+        "散户": 0.3515
+      },
+      "confidence_margin": 0.038,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.038)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "量化高频风格强度(z=-2.33)；l1_pd_return_kurt(z=+2.05)；l4_trend_r_squared(z=+1.28)"
+    },
+    "600963.SH": {
+      "stock_code": "600963.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4519,
+        "量化": 0.3245,
+        "散户": 0.2236
+      },
+      "confidence_margin": 0.1274,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.127)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_obp_ask_skew_mean(z=-2.56)；l1_obp_bid_skew_mean(z=-2.26)；l4_rand_serial_corr(z=-1.66)"
+    },
+    "603817.SH": {
+      "stock_code": "603817.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4728,
+        "量化": 0.2651,
+        "散户": 0.2621
+      },
+      "confidence_margin": 0.2078,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "微观物理守恒因果核验自洽，模型置信度高，予以确认。",
+      "evidence_chain": "l1_kl_doji_score(z=+2.69)；盘口深度衰减斜率(z=+1.69)；l1_pd_price_jump_max(z=-1.49)"
+    },
+    "600419.SH": {
+      "stock_code": "600419.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.434,
+        "量化": 0.2697,
+        "散户": 0.2964
+      },
+      "confidence_margin": 0.1376,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.138)，调取全量特征后微观因果倾向于散户。",
+      "evidence_chain": "l1_kl_doji_score(z=+2.69)；l1_pd_price_jump_max(z=-1.51)；l1_cb_cancel_imbalance(z=-1.43)"
+    },
+    "603278.SH": {
+      "stock_code": "603278.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3664,
+        "量化": 0.2755,
+        "散户": 0.3581
+      },
+      "confidence_margin": 0.0082,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛显示置信度极度模糊（Margin仅为0.0082），且规则初查已提示微观因果倾向于量化。盘口证据链严密支持量化特征：1. 趋势平滑度证据：l4_trend_r_squared Z-Score为-1.24，表明日内价格趋势R平方值显著低于均值，路径非单调平滑，呈现典型的量化高频震荡或非趋势性随机游走特征，这与游资追求的封板冲量及趋势爆发物理定律相悖。2. 订单簿微观结构证据：l1_dc_sudden_change_ratio Z-Score为+1.24，显示订单簿深度或价格结构发生非自然的突变，符合量化策略在特定阈值触发的快速撤单/挂单行为；l1_cb_big_cancel_amount_pct Z-Score为-1.37，大单撤单金额占比偏低，暗示其资金运作可能依赖高频小额拆单做市或被动承接，而非传统游资的大额主动扫货与撤单博弈。3. 散户特征排除：散户缺乏对倒清洗能力与主动定价权，无法造成上述高阶统计特征的显著离群，故排除。综合微观离群特征，判定为量化。",
+      "evidence_chain": "大单撤单金额占比(z=-1.37)；l1_dc_sudden_change_ratio(z=+1.24)；l4_trend_r_squared(z=-1.24)"
+    },
+    "600547.SH": {
+      "stock_code": "600547.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4502,
+        "量化": 0.2788,
+        "散户": 0.2711
+      },
+      "confidence_margin": 0.1714,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "尽管量化高频风格强度呈显著负向离群（Z=-2.38）且闪撤总数偏高（Z=+1.48），但核心物理特征指向游资：极高的成交时间间隔变异系数（Z=+2.31）表明交易节奏极度不规则，缺乏量化算法的等间隔拆单特征；脉冲成交突发爆发率（Z=+2.31）与价格跳跃次数（Z=+2.23）显著为正，符合游资突发大单冲击盘口的物理守恒定律。总撤单笔数占比偏低（Z=-1.72）说明并非高频挂撤策略，而是实盘买卖行为。虽然kl_gap_ratio偏高显示存在一定流动性枯竭或挂单价差，但结合高突发率和低拆单特征，判定为游资主导的脉冲式进攻，而非量化做市或散户散单。",
+      "evidence_chain": "量化高频风格强度(z=-2.38)；成交时间间隔变异系数(z=+2.31)；脉冲成交突发爆发率(z=+2.31)"
+    },
+    "600066.SH": {
+      "stock_code": "600066.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3482,
+        "量化": 0.2484,
+        "散户": 0.4034
+      },
+      "confidence_margin": 0.0552,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "初判为散户，但Margin仅0.055且规则提示微观因果倾向量化。证据显示：l1_kl_lower_shadow_ratio (Z=+2.94) 极度异常，暗示盘口下方存在非自然的支撑或吸收行为；l2_time_hhi (Z=+1.18) 表明资金流入时间分布高度集中，符合算法在特定时段脉冲式执行特征；l3_mat_vol_clustering_acf (Z=-1.72) 显示成交量聚集自相关为负，即成交量呈现“震荡/反转”模式而非趋势跟随，这是典型的量化高频挂撤或做市商库存管理行为，散户极少有规律地产生负自相关的成交量模式。综合物理定律，散户无能力制造如此极端的下影线与负自相关成交量结构，而量化模型通过拆分订单与高频交互易导致此类微观结构离群。",
+      "evidence_chain": "l1_kl_lower_shadow_ratio(z=+2.94)；l3_mat_vol_clustering_acf(z=-1.72)；l1_pi_open_30min_amount_pct(z=+1.54)"
+    },
+    "603308.SH": {
+      "stock_code": "603308.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4209,
+        "量化": 0.2734,
+        "散户": 0.3057
+      },
+      "confidence_margin": 0.1153,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛处于边界(Margin=0.115)，经全量特征复审倾向于支撑游资假说。",
+      "evidence_chain": "l1_rs_volume_kurt(z=+4.09)；l1_rs_volume_skew(z=+2.97)；l1_pd_price_momentum(z=-2.39)"
+    },
+    "600728.SH": {
+      "stock_code": "600728.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4415,
+        "量化": 0.3198,
+        "散户": 0.2387
+      },
+      "confidence_margin": 0.1217,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.122)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_obp_bid_skew_mean(z=-2.73)；l1_ap_sweep_ratio(z=+2.49)；l1_obp_ask_skew_mean(z=-1.71)"
+    },
+    "600302.SH": {
+      "stock_code": "600302.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3505,
+        "量化": 0.3392,
+        "散户": 0.3103
+      },
+      "confidence_margin": 0.0113,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "初审模型因置信度极低（Margin=0.0113）触发仲裁，需依据微观物理定律重新裁定。证据链显示：1. 高频撤单率（<500ms）Z-Score为-1.54，显著低于均值，排除了量化高频策略中典型的挂撤博弈与做市行为；2. 成交量聚集自相关（clustering_acf）为-1.66，表明缺乏算法拆单产生的均匀离散特征，更符合散户情绪驱动下的脉冲式交易；3. 虽有部分主动买特大单净流入，但缺乏游资必备的“突发大单脉冲”与“封板冲量”连续特征，且最大回撤Z-Score偏高，符合散户追涨杀跌的高波动行为；4. 综合来看，主动定价权缺失，对倒清洗能力为零，完全符合散户主导的微观结构特征。",
+      "evidence_chain": "l4_acf_volume_lag1(z=+2.44)；l1_ap_big_net_inflow(z=+1.69)；l3_mat_vol_clustering_acf(z=-1.66)"
+    },
+    "600592.SH": {
+      "stock_code": "600592.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4121,
+        "量化": 0.2955,
+        "散户": 0.2924
+      },
+      "confidence_margin": 0.1166,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.117)，调取全量特征后微观因果倾向于散户。",
+      "evidence_chain": "l4_acf_volume_lag1(z=-1.39)；l1_kl_upper_shadow_ratio(z=-1.30)；l3_mat_seq_pattern_score(z=-1.22)"
+    },
+    "600581.SH": {
+      "stock_code": "600581.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3702,
+        "量化": 0.3447,
+        "散户": 0.2852
+      },
+      "confidence_margin": 0.0255,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.026)，调取全量特征后微观因果倾向于散户。",
+      "evidence_chain": "Amihud 非流动性指标(z=+4.68)；dq_missing_trade_ratio(z=+4.38)；l1_micro_price_impact_elasticity(z=+4.31)"
+    },
+    "688578.SH": {
+      "stock_code": "688578.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3509,
+        "量化": 0.2836,
+        "散户": 0.3656
+      },
+      "confidence_margin": 0.0147,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.015)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "散户小单成交笔数占比(z=-2.77)；l1_kl_doji_score(z=+2.69)；l1_pd_up_ratio(z=+2.46)"
+    },
+    "688396.SH": {
+      "stock_code": "688396.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3836,
+        "量化": 0.2857,
+        "散户": 0.3307
+      },
+      "confidence_margin": 0.0529,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "物理守恒原则下，游资主导需具备高Z-Score的大单脉冲或封板冲量，但本案例中l1_quant_small_pct为-1.79，表明算法拆单显著，且l4_rand_symbol_entropy高达+1.64，符合高频挂撤特征；散户占比低且缺乏定价权，模型初筛游资置信度仅0.38且Margin过小，微观因果强烈指向量化做市。",
+      "evidence_chain": "l1_kl_doji_score(z=+2.69)；散户小单成交笔数占比(z=-2.45)；l1_kl_upper_shadow_ratio(z=+2.37)"
+    },
+    "600782.SH": {
+      "stock_code": "600782.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4499,
+        "量化": 0.3243,
+        "散户": 0.2259
+      },
+      "confidence_margin": 0.1256,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "初筛模型虽倾向游资，但Margin仅0.1256，处于模糊区间。微观证据显示l1_obp_ask_skew_mean与bid_skew_mean均为负Z-Score（约-2.4），表明买卖两侧挂单均缺乏深度支撑且结构对称性被打破，缺乏游资特有的单边突发性大单脉冲或封板冲量。l4_trend_r_squared为负Z-Score（-1.60），说明价格趋势拟合度低，路径混乱，不符合量化高频算法平滑或游资直线拉升特征。l1_pd_return_std与l1_avg_trade_size_log的正向离群（+1.71, +1.66）暗示波动率高且平均成交笔数适中，而非巨量单笔。l1_kl_lower_shadow_ratio高企（+1.54）配合收盘前成交占比微升，符合散户情绪驱动下的低位承接与尾盘博弈特征，缺乏主动定价权，符合散户物理画像。",
+      "evidence_chain": "l1_obp_ask_skew_mean(z=-2.49)；l1_obp_bid_skew_mean(z=-2.44)；l1_pi_close_rush_amount_pct(z=+1.72)"
+    },
+    "601778.SH": {
+      "stock_code": "601778.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4673,
+        "量化": 0.3181,
+        "散户": 0.2146
+      },
+      "confidence_margin": 0.1492,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛虽指向游资，但置信度边际仅0.1492，证据链薄弱。微观特征显示l1_obp_bid_skew_mean显著为负（Z=-2.24），表明买方订单簿缺乏深度且分布均匀，不符合游资突袭式的大单堆叠特征；同时l4_rand_serial_corr与variance_ratio均为负值，剔除随机噪声后呈现出典型的高频算法拆单与做市对冲行为。成交量（Z=+2.12）与交易笔数（Z=+1.61）双高，而平均单笔交易大小（Z=+1.49）仅温和上升，暗示流量由大量中小单汇聚而成，符合量化策略碎片化拆单以隐蔽建仓或做市的物理定律，而非游资的脉冲式大单。",
+      "evidence_chain": "l1_obp_bid_skew_mean(z=-2.24)；l1_volume_total_log(z=+2.12)；l1_dc_bid_change_mean(z=+1.83)"
+    },
+    "688571.SH": {
+      "stock_code": "688571.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3452,
+        "量化": 0.3164,
+        "散户": 0.3385
+      },
+      "confidence_margin": 0.0067,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛置信度极值仅为0.3452，Margin差距0.0067远小于阈值，触发强制质证。审视微观特征：l4_trend_r_squared (+1.20) 与 l4_rand_serial_corr (+1.28) 虽显示一定序列性，但 l3_mat_seq_pattern_score 显著为负 (-1.22)，表明不存在典型的量化算法矩阵序列特征或高频对倒清洗痕迹，这直接违背了量化资金在微观结构上的物理守恒（量化必有高频挂撤或算法拆单形成的特定序列模式）。同时，缺乏 l1_kl_gap_ratio 的大幅正向离群（当前为 -1.19，显示流动性枯竭而非主动冲击），且没有封板冲量或突发大单脉冲的证据，排除游资主导。l1_pi_open_30min_amount_pct 为负 (-1.14) 暗示开盘半小时量能未过度集中，资金介入节奏平缓，符合散户跟风或被动承接的特征。综合来看，微观看不到机构或量化的主动定价权与高频操控痕迹，序列性的微弱正态可能源于日内趋势的自然惯性而非算法驱动，故修正为散户。",
+      "evidence_chain": "l4_rand_variance_ratio(z=+1.40)；l1_pd_return_skew(z=+1.34)；l4_rand_serial_corr(z=+1.28)"
+    },
+    "688013.SH": {
+      "stock_code": "688013.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3076,
+        "量化": 0.2505,
+        "散户": 0.4419
+      },
+      "confidence_margin": 0.1344,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "经复核微观盘口物理特征，初判散户假说成立。首先，l4_ofi_autocorr_lag1 Z-Score=-2.93显示订单流不平衡自相关极低，暗示交易行为缺乏方向性持续性，符合散户随机博弈特征，排除量化趋势跟踪算法；其次，l1_avg_trade_size_log Z-Score=-1.41表明平均单笔成交金额显著低于截面均值，且大单撤单占比（l1_cb_big_cancel_amount_pct Z=-1.40）偏低，直接否定了量化高频挂撤做市及游资大单脉冲的物理定律；最后，委托符号序列信息熵（+1.68）偏高但配合买盘倾斜（l1_obp_bid_skew_mean +1.65）及上行比例（l1_pd_up_ratio +1.40），呈现出典型的散户多头情绪驱动下的被动承接与随机跟风模式，而非主动定价或算法对倒。综合判断，该标的缺乏主力算法或游资的结构性操纵痕迹，确认为散户主导。",
+      "evidence_chain": "l4_ofi_autocorr_lag1(z=-2.93)；委托符号序列信息熵(z=+1.68)；l1_obp_bid_skew_mean(z=+1.65)"
+    },
+    "600478.SH": {
+      "stock_code": "600478.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4655,
+        "量化": 0.3115,
+        "散户": 0.223
+      },
+      "confidence_margin": 0.154,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "初判为游资，置信度0.4655，虽非极高，但Margin为0.1540，表明与次优类别（量化，0.3115）差距较为明显。根据微观盘口证据，游资的核心物理特征应有突发大单脉冲和封板冲量，同时量化特征（如算法拆单、高频挂撤）应较弱。当前证据中，量化高频风格强度（enh_quant_score）Z-Score为-1.07，显著低于均值，说明量化特征并不突出。而盘口深度衰减斜率（l1_obp_depth_decay_mean）Z-Score为+1.45，接近+2，提示盘口流动性快速消耗，这与游资冲击或吸筹可能有关。虽缺乏封板冲量的直接证据，但结合规则初查结论为CONFIRMED，且模型初判为游资，无明显违背物理守恒，故予以确认。",
+      "evidence_chain": "盘口深度衰减斜率(z=+1.45)；l4_rand_variance_ratio(z=-1.35)；盘口累积净买入冲量(z=-1.27)"
+    },
+    "600858.SH": {
+      "stock_code": "600858.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4098,
+        "量化": 0.2965,
+        "散户": 0.2937
+      },
+      "confidence_margin": 0.1134,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.113)，调取全量特征后微观因果倾向于散户。",
+      "evidence_chain": "l1_swp_quote_sweep_ratio(z=-2.29)；l1_cb_cancel_imbalance(z=-2.07)；l1_obp_ask_skew_mean(z=-1.71)"
+    },
+    "688248.SH": {
+      "stock_code": "688248.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3319,
+        "量化": 0.2476,
+        "散户": 0.4205
+      },
+      "confidence_margin": 0.0886,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.089)，调取全量特征后微观因果倾向于游资。",
+      "evidence_chain": "l1_pi_close_rush_amount_pct(z=+2.61)；enh_cancel_x_close(z=+2.04)；l1_pi_close_10min_amount_pct(z=+1.76)"
+    },
+    "600521.SH": {
+      "stock_code": "600521.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4463,
+        "量化": 0.3403,
+        "散户": 0.2133
+      },
+      "confidence_margin": 0.106,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛虽倾向游资，但Margin仅0.106，处于边界模糊区。微观证据强烈支持量化：1. l3_mat_vol_clustering_acf (+1.51) 显示成交量聚类自相关显著，暗示算法周期性触发或高频挂撤节奏，而非游资的随机性大单；2. l2_mat_entropy (-1.20) 表明订单簿结构熵值低，市场状态有序，符合量化策略维持点差做市或网格交易的特征，而游资冲击通常导致高熵混乱；3. enh_burst_x_direction (+1.58) 与 l2_amt_trend (-1.45) 的组合显示，虽有方向性爆发，但整体金额趋势并未呈单边拉升，更符合量化在特定价位区间的波段操作或对冲行为，缺乏游资标志性的持续封板冲量证据；4. l1_micro_hhi_30min (+1.25) 高集中度配合低熵，指向少数算法实体在盘中主要时间段的控制力，而非散户或典型游资的脉冲式介入。综上，物理定律上缺乏游资必备的‘突发大单脉冲与封板冲量’强证据，而算法拆单、高频交互特征显著，故修正为量化。",
+      "evidence_chain": "l4_trend_r_squared(z=-1.60)；enh_burst_x_direction(z=+1.58)；l3_mat_vol_clustering_acf(z=+1.51)"
+    },
+    "603660.SH": {
+      "stock_code": "603660.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.415,
+        "量化": 0.3075,
+        "散户": 0.2775
+      },
+      "confidence_margin": 0.1075,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.107)，调取全量特征后微观因果倾向于散户。",
+      "evidence_chain": "l3_mat_seq_pattern_score(z=-1.22)；l4_rand_hurst_gain(z=-0.99)；l1_pd_max_drawdown(z=+0.96)"
+    },
+    "601899.SH": {
+      "stock_code": "601899.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.431,
+        "量化": 0.3641,
+        "散户": 0.2049
+      },
+      "confidence_margin": 0.0669,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛处于边界(Margin=0.067)，经全量特征复审倾向于支撑游资假说。",
+      "evidence_chain": "l1_pd_price_jump_count(z=+6.55)；盘口累积净买入冲量(z=+6.00)；l2_flash_cancel_total(z=+5.81)"
+    },
+    "688599.SH": {
+      "stock_code": "688599.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3895,
+        "量化": 0.3491,
+        "散户": 0.2614
+      },
+      "confidence_margin": 0.0404,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.040)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l3_mat_vol_clustering_acf(z=+1.85)；主买大单净成交比率(z=+1.84)；大单撤单金额占比(z=+1.64)"
+    },
+    "600726.SH": {
+      "stock_code": "600726.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4914,
+        "量化": 0.2528,
+        "散户": 0.2558
+      },
+      "confidence_margin": 0.2356,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "微观物理守恒因果核验自洽，模型置信度高，予以确认。",
+      "evidence_chain": "l4_rand_runs_stat(z=-9.39)；l1_dc_bid_change_max(z=+7.14)；l1_ap_max_consecutive_sell(z=+6.38)"
+    },
+    "600415.SH": {
+      "stock_code": "600415.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4256,
+        "量化": 0.3355,
+        "散户": 0.2389
+      },
+      "confidence_margin": 0.0901,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "初筛模型倾向于游资，但微观盘口证据违背了游资突发性物理守恒定律。高Z-score的主动买盘占比(+1.67)与最大连续买(+1.61)若为游资，应伴随极高振幅与大单笔脉冲，但撤单率显著偏低(-1.40)且OBS失衡为负值(-1.53)，说明买方挂单被算法主动撤除与压制；同时成交时间间隔变异系数偏高(+1.36)与K线实体比偏高(+1.36)表明盘中节奏被算法拆解与控盘，非游资一次性冲锋，故果断修正为量化资金。",
+      "evidence_chain": "l1_ap_active_buy_pct(z=+1.67)；l1_ap_max_consecutive_buy(z=+1.61)；买卖五档挂单压力不平衡(z=-1.53)"
+    },
+    "603686.SH": {
+      "stock_code": "603686.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4536,
+        "量化": 0.303,
+        "散户": 0.2434
+      },
+      "confidence_margin": 0.1506,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "微观物理守恒因果核验自洽，模型置信度高，予以确认。",
+      "evidence_chain": "l3_mat_seq_pattern_score(z=+2.37)；l3_mat_vol_clustering_acf(z=-2.11)；l1_ask_shape_mean(z=+1.67)"
+    },
+    "603799.SH": {
+      "stock_code": "603799.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4403,
+        "量化": 0.3155,
+        "散户": 0.2442
+      },
+      "confidence_margin": 0.1248,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.125)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "量化高频风格强度(z=-2.86)；l4_rand_runs_stat(z=-2.85)；成交时间间隔变异系数(z=+2.16)"
+    },
+    "688026.SH": {
+      "stock_code": "688026.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3268,
+        "量化": 0.2727,
+        "散户": 0.4005
+      },
+      "confidence_margin": 0.0736,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.074)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_pd_return_skew(z=-3.27)；l3_jump_max(z=+3.21)；l1_pd_price_jump_max(z=+2.77)"
+    },
+    "600117.SH": {
+      "stock_code": "600117.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4185,
+        "量化": 0.328,
+        "散户": 0.2536
+      },
+      "confidence_margin": 0.0905,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.091)，调取全量特征后微观因果倾向于散户。",
+      "evidence_chain": "l1_pd_return_std(z=+2.57)；l1_amount_total_log(z=-2.28)；盘口深度衰减斜率(z=+2.19)"
+    },
+    "600711.SH": {
+      "stock_code": "600711.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4933,
+        "量化": 0.2461,
+        "散户": 0.2606
+      },
+      "confidence_margin": 0.2326,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "初筛结果与微观物理证据高度自洽。证据链显示l1_limit_touch_upper（+4.34）与l1_limit_seal_upper_strength（+3.92）显著为正，表明存在明确的冲击涨停及强力封板行为，这是具备主动定价权资金的典型特征，直接排除了缺乏定价能力的散户。同时，l1_ap_max_consecutive_sell（+6.04）极高，反映盘中伴随剧烈的大单连续主动抛售，符合游资‘高抛低吸’或‘打板分歧转一致’的脉冲式交易指纹。量化资金虽可能有算法拆单，但通常表现为高频挂撤与对倒做市，而非如此极端的封板强度与单边主动卖出的物理组合。Z-score的离群值组合指向突发的大单脉冲与封板冲量，符合游资的物理守恒定律，故维持初判。",
+      "evidence_chain": "l1_ap_max_consecutive_sell(z=+6.04)；l1_bid_shape_mean(z=+5.64)；l1_dc_bid_change_mean(z=+5.19)"
+    },
+    "601083.SH": {
+      "stock_code": "601083.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3759,
+        "量化": 0.309,
+        "散户": 0.3152
+      },
+      "confidence_margin": 0.0607,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛置信度极低（Margin仅0.0607），且微观特征与游资物理定律严重冲突。证据链显示：1. 缺乏游资核心特征：成交金额对数Z-Score为-1.76，流动性平庸，无游资必备的‘突发大单脉冲’或‘封板冲量’；挂撤扫单比率（l1_swp_quote_sweep_ratio）Z-Score为-2.57，表明无高频撤单清洗动作，不符合游资暴力扫货模式。2. 确认量化物理特征：订单流自相关性（l4_ofi_autocorr_lag1）显著为负（-1.58），结合成交量自相关（l4_acf_volume_lag1）为正（+1.27），呈现典型的算法均值回归/对冲行为；矩阵波动聚集度（l3_mat_vol_clustering_acf）与序列模式分（l3_mat_seq_pattern_score）同步抬升，暗示存在程序化网格或T+0高频拆单逻辑，导致盘面波动呈现规律性聚集。规则初裁提示‘倾向于量化’与证据完全吻合。",
+      "evidence_chain": "l1_swp_quote_sweep_ratio(z=-2.57)；l1_kl_lower_shadow_ratio(z=+1.90)；l1_amount_total_log(z=-1.76)"
+    },
+    "600654.SH": {
+      "stock_code": "600654.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4699,
+        "量化": 0.3216,
+        "散户": 0.2085
+      },
+      "confidence_margin": 0.1483,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛判为游资但置信度低且与微观特征矛盾。证据显示盘口累积净买入冲量(l1_ofi_cont_cumsum_last)呈-3.43的低水平Z-Score，说明缺乏游资典型的持续强力净买入或封板冲量特征；而高成交笔数(l1_txn_count_log: +2.03)、高盘口变动幅度(l1_dc_ask_change_max: +2.77)与高波动率(l1_kl_amplitude: +2.30)并存，符合量化算法高频拆单、挂撤与对倒做市的微观物理特征，故修正为量化。",
+      "evidence_chain": "盘口累积净买入冲量(z=-3.43)；l1_dc_ask_change_max(z=+2.77)；l1_volume_total_log(z=+2.33)"
+    },
+    "601318.SH": {
+      "stock_code": "601318.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4322,
+        "量化": 0.3394,
+        "散户": 0.2284
+      },
+      "confidence_margin": 0.0927,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "质证发现初筛置信度边界模糊（Margin 0.093），但微观物理特征呈现显著非量化分布特征。l3_burst_max (+3.74) 与 l1_rs_burst_ratio (+2.32) 证明存在极端强度的大单脉冲爆发，符合游资“突击”物理定律。l1_trd_interval_cv (+2.53) 表明成交间隔极不稳定，排除量化算法的高频均匀性。虽有 l2_flash_cancel_total (+1.68) 显示挂撤行为，但 l1_cb_cancel_order_ratio (-1.53) 表明总撤单率偏低，排除量化做市商高频对倒特征。综合判断，大单主导、间隔离散、撤单率低，强力支撑游资假说。",
+      "evidence_chain": "l3_burst_max(z=+3.74)；成交时间间隔变异系数(z=+2.53)；脉冲成交突发爆发率(z=+2.32)"
+    },
+    "688332.SH": {
+      "stock_code": "688332.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3641,
+        "量化": 0.2438,
+        "散户": 0.3921
+      },
+      "confidence_margin": 0.0281,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.028)，调取全量特征后微观因果倾向于游资。",
+      "evidence_chain": "触及涨停次数与开盘冲量(z=+4.34)；l1_kl_amplitude(z=+3.23)；l1_limit_near_upper_ratio(z=+2.82)"
+    },
+    "600775.SH": {
+      "stock_code": "600775.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4397,
+        "量化": 0.3,
+        "散户": 0.2603
+      },
+      "confidence_margin": 0.1398,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛置信度边际差异仅0.14，判定模糊。物理定律质证显示：l1_dc_sudden_change_ratio (Z=+1.94) 虽较高，但 l1_pd_price_jump_max (Z=-1.32) 与 l1_pd_return_std (Z=-1.06) 显著为负，表明日内价格跳动幅度小、波动率低，缺乏游资特有的暴力脉冲与大幅震荡特征；l1_ap_sweep_ratio (Z=+1.28) 显示扫单比例适中但未形成封板合力；l3_mat_vol_clustering_acf (Z=+1.64) 提示成交量存在一定聚集性，但 l4_acf_volume_lag1 (Z=-1.43) 显示滞后相关性弱，排除了量化高频算法拆单与对倒做市的强周期性特征；l1_pi_close_rush_amount_pct (Z=+1.05) 显示尾盘有一定资金介入，但结合l1_kl_lower_shadow_ratio (Z=-1.17) 下影线短，缺乏主力护盘或诱多陷阱的复杂结构。综合微观因果，缺乏高波动、高主动定价权及算法高频特征，符合散户情绪驱动、跟风追涨（尤其尾盘）的物理形态。",
+      "evidence_chain": "l1_dc_sudden_change_ratio(z=+1.94)；l3_mat_vol_clustering_acf(z=+1.64)；l4_acf_volume_lag1(z=-1.43)"
+    },
+    "603727.SH": {
+      "stock_code": "603727.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3775,
+        "量化": 0.2565,
+        "散户": 0.366
+      },
+      "confidence_margin": 0.0115,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛处于边界(Margin=0.011)，经全量特征复审倾向于支撑游资假说。",
+      "evidence_chain": "l1_pd_max_drawdown(z=+3.56)；l1_pi_vwap_deviation(z=+3.40)；l4_fft_spectral_entropy(z=+3.22)"
+    },
+    "600690.SH": {
+      "stock_code": "600690.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4119,
+        "量化": 0.3292,
+        "散户": 0.2589
+      },
+      "confidence_margin": 0.0828,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "初筛虽处于边界状态，但截面离群特征强烈支持游资假说：l3_burst_max（+1.81Z）表明存在显著的突发大单脉冲，这是游资主动出击、争夺定价权的典型物理特征；l1_kl_lower_shadow_ratio（+1.74Z）显示下影线长，意味着盘中遭遇抛压后有大资金强力承接；l4_acf_volume_lag1（+1.67Z）与l1_rs_volume_skew（+1.63Z）揭示了量能的显著自相关与正向偏态，符合主力资金介入后引发的市场跟随效应。相反，算法拆单熵（-1.35Z）的低水平与总撤单笔数占比（-1.52Z）的低水平，排除了高频量化策略中典型的高频挂撤与算法拆单行为，不符合量化的物理守恒定律。综合证据链，判定为游资。",
+      "evidence_chain": "l3_burst_max(z=+1.81)；l1_kl_lower_shadow_ratio(z=+1.74)；l4_acf_volume_lag1(z=+1.67)"
+    },
+    "603328.SH": {
+      "stock_code": "603328.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4103,
+        "量化": 0.3097,
+        "散户": 0.2799
+      },
+      "confidence_margin": 0.1006,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "初筛为游资但置信度极低（Margin 0.1006），且微观特征违背游资物理定律。游资必然伴随高拆单熵（随机大单脉冲）与高动量，但此处 l1_rs_split_similarity Z-Score=-1.16 显示拆单周期高度规律，具有明显算法指纹；l2_buy_range Z-Score=+1.88 与 l1_ap_big_net_inflow Z-Score=+1.48 表明买盘呈宽幅分层布局而非单一脉冲封板；l4_trend_r_squared 高值与 l4_rand_hurst_gain 低值符合量化趋势跟踪但非长程持续性特征。整体证据链指向算法化拆单与被动挂单逻辑，故修正为量化。",
+      "evidence_chain": "l2_buy_range(z=+1.88)；l4_trend_r_squared(z=+1.48)；l1_ap_big_net_inflow(z=+1.48)"
+    },
+    "601949.SH": {
+      "stock_code": "601949.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4434,
+        "量化": 0.264,
+        "散户": 0.2926
+      },
+      "confidence_margin": 0.1509,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "初判游资置信度最高且Margin显著。微观证据高度吻合游资特征：l1_rs_volume_kurt与skew Z-Score均>3.5，表明成交量呈极端尖峰厚尾分布，符合游资脉冲式扫单物理特性；l4_acf_volume_lag1 Z-Score +3.31显示成交具有极强自相关性，即“追涨打板”行为；l1_rs_burst_ratio +2.06进一步证实突发成交。同时，l1_swp_quote_sweep_ratio Z-Score -2.05（负值）排除量化做市高频挂撤干扰；l1_kl_lower_shadow_ratio +2.57提示下方承接有力。综合来看，缺乏量化的算法拆单平稳特征，散户也不具备此等极端统计异质性，故维持游资判断。",
+      "evidence_chain": "l1_rs_volume_kurt(z=+3.60)；l1_rs_volume_skew(z=+3.58)；l4_acf_volume_lag1(z=+3.31)"
+    },
+    "601228.SH": {
+      "stock_code": "601228.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4388,
+        "量化": 0.3228,
+        "散户": 0.2384
+      },
+      "confidence_margin": 0.116,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.116)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_obp_ask_skew_mean(z=-3.04)；l2_buy_range(z=+2.41)；盘口深度衰减斜率(z=+2.25)"
+    },
+    "688716.SH": {
+      "stock_code": "688716.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3194,
+        "量化": 0.2566,
+        "散户": 0.424
+      },
+      "confidence_margin": 0.1046,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "1. 物理守恒违背检查：散户资金缺乏主动定价权，无法形成系统性的高频微观结构扰动。初筛为散户但置信度极低(Margin=0.105)，且规则初查提示微观因果倾向量化。2. 证据链交叉验证：l4_rand_serial_corr(+1.47)与l4_rand_variance_ratio(+1.31)显著偏离随机游走假设，表明存在算法驱动的自相关序列与方差管理特征，这是量化交易（尤其是高频做市或统计套利）的典型指纹。3. 盘口行为：l1_kl_body_ratio(+2.13)显示K线实体占比极高且稳定，配合l1_pi_close_10min_amount_pct(-1.44)显示尾盘缩量，符合量化策略在日内特定时间窗口的挂撤单控制与流动性提供特征，而非散户的情绪化波动。综上，散户假说与微观高频统计特征严重冲突，修正为量化。",
+      "evidence_chain": "l1_kl_body_ratio(z=+2.13)；l1_kl_upper_shadow_ratio(z=-1.62)；l4_rand_serial_corr(z=+1.47)"
+    },
+    "688568.SH": {
+      "stock_code": "688568.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3464,
+        "量化": 0.2844,
+        "散户": 0.3692
+      },
+      "confidence_margin": 0.0228,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.023)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l3_mat_seq_pattern_score(z=+2.37)；委托符号序列信息熵(z=+1.69)；大单撤单金额占比(z=+1.48)"
+    },
+    "603725.SH": {
+      "stock_code": "603725.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4928,
+        "量化": 0.2324,
+        "散户": 0.2748
+      },
+      "confidence_margin": 0.218,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "基于微观盘口证据的物理守恒定律核验：1. l1_limit_seal_upper_strength (Z=+5.85) 与 l1_limit_near_upper_ratio (Z=+5.43) 极强，表明涨停封单厚实且接近涨停价成交占比高，符合游资‘封板’行为特征；2. enh_burst_x_direction (Z=+5.81) 显示正向突发脉冲，验证了游资主导的主动买入冲量；3. l2_mat_entropy (Z=-4.52) 熵值显著偏低，说明订单分布高度有序、非随机，排除了量化算法高频拆单或散户无序交易导致的混沌状态；4. l1_oss_mega_amount_pct (Z=+4.65) 表明超大单占比高，符合游资大单主导特性。模型初判游资概率0.49虽为最高但置信度边际有限，然而微观物理证据（高熵变负值、高封单强度、大单占比）强自洽地指向游资，无量化高频做市或散户缺乏定价权的特征，故予以确认。",
+      "evidence_chain": "l1_bid_shape_mean(z=+7.24)；l1_limit_seal_upper_strength(z=+5.85)；enh_burst_x_direction(z=+5.81)"
+    },
+    "688122.SH": {
+      "stock_code": "688122.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3375,
+        "量化": 0.3057,
+        "散户": 0.3567
+      },
+      "confidence_margin": 0.0192,
+      "verdict": "OVERRIDDEN",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": false,
+      "override_reason": "模型初判散户置信度仅领先游资0.0192，且Margin极小，判错风险极高。证据链显示散户不可能主导市场：l1_oss_small_count_pct Z-Score为-2.27，散户小单占比显著低于常态，排除散户主导；l1_od_active_big_ratio Z-Score为+2.16，主买大单净成交比率极高，表明存在强力主动买方。结合l4_rand_symbol_entropy Z-Score为+1.91（委托符号序列信息熵高，显示非随机、有算法节奏）以及l1_rs_split_similarity Z-Score为+1.38（拆单周期相似度高，符合算法拆单特征），以及l1_cb_big_cancel_amount_pct Z-Score为+1.54（大单撤单占比高，显示挂单策略调整频繁），综合判定为量化资金通过对倒清洗与大单主动成交主导盘口，而非散户行为。",
+      "evidence_chain": "散户小单成交笔数占比(z=-2.27)；主买大单净成交比率(z=+2.16)；委托符号序列信息熵(z=+1.91)"
+    },
+    "600838.SH": {
+      "stock_code": "600838.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3988,
+        "量化": 0.3103,
+        "散户": 0.2909
+      },
+      "confidence_margin": 0.0885,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛处于边界(Margin=0.089)，经全量特征复审倾向于支撑游资假说。",
+      "evidence_chain": "l1_swp_quote_sweep_ratio(z=-2.85)；l3_mat_seq_pattern_score(z=+2.37)；l1_obpi_mean(z=+1.59)"
+    },
+    "688585.SH": {
+      "stock_code": "688585.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3205,
+        "量化": 0.259,
+        "散户": 0.4205
+      },
+      "confidence_margin": 0.1,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.100)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l4_trend_linear(z=-6.43)；l1_od_price_deviation_mean(z=+2.90)；散户小单成交笔数占比(z=-2.80)"
+    },
+    "600429.SH": {
+      "stock_code": "600429.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.464,
+        "量化": 0.2483,
+        "散户": 0.2877
+      },
+      "confidence_margin": 0.1764,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "经质证，模型初判游资与微观证据高度自洽。Z-Score显示主动买盘OFI正向比率高达+3.51，表明存在极强的主动买入意愿和定价权，符合游资主导特征；kl_doji_score (+2.69) 与 lower_shadow_ratio (+1.80) 显示K线形态具备典型的承接下影线，暗示下方抛压被强力消化或吸筹完毕，这是游资洗盘后拉升的典型形态。虽然 l1_quant_small_pct 略高 (+1.64)，但结合 l4_trend_r_squared 为负 (-1.56) 意味着盘中趋势性不强，更多是脉冲式波动而非量化的平滑算法交易。l3_mat_vol_clustering_acf (+1.48) 表明成交量存在聚集效应，符合游资集中点火或撤单后留下的流动性真空。整体缺乏量化特有的高频挂撤噪声特征，且散户无法解释如此高的OFI正向比率与主动定价能力，故确认初判游资。",
+      "evidence_chain": "主动买盘OFI正向比率(z=+3.51)；l1_kl_doji_score(z=+2.69)；l1_pi_close_10min_amount_pct(z=+2.39)"
+    },
+    "603719.SH": {
+      "stock_code": "603719.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3916,
+        "量化": 0.2837,
+        "散户": 0.3247
+      },
+      "confidence_margin": 0.0668,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.067)，调取全量特征后微观因果倾向于散户。",
+      "evidence_chain": "l1_obpi_mean(z=+1.59)；买卖五档挂单压力不平衡(z=+1.52)；l1_obp_bid_skew_mean(z=-1.41)"
+    },
+    "688516.SH": {
+      "stock_code": "688516.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3486,
+        "量化": 0.252,
+        "散户": 0.3994
+      },
+      "confidence_margin": 0.0508,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.051)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_kl_body_ratio(z=+1.87)；算法拆单周期相似度(拆单熵)(z=+1.52)；l1_avg_trade_size_log(z=-1.46)"
+    },
+    "603729.SH": {
+      "stock_code": "603729.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3142,
+        "量化": 0.2775,
+        "散户": 0.4083
+      },
+      "confidence_margin": 0.0942,
+      "verdict": "OVERRIDDEN",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": false,
+      "override_reason": "模型初判为散户（置信度40.83%）与微观盘口物理定律严重冲突。证据显示l1_amihud_illiquidity Z-Score高达+4.41，伴随dq_missing_trade_ratio Z-Score +4.45，表明存在高频报单缺失或算法执行导致的成交断档，这是散户交易完全无法产生的现象。更关键的是，l1_swp_quote_sweep_ratio Z-Score达到+4.16，且初查提示检测到极高对倒清洗与大单成交（Z>2.0），散户绝无主动定价权及制造对倒清洗的能力。l1_rs_top5_volume_pct与l1_rs_top10_volume_pct的高Z值（+3.60/+3.38）揭示了流动性被少数算法席位集中收割的特征，而非散户的自然随机分布。l1_quant_uniform_score（+3.43）直接指向算法执行的均匀性。综上，散户假设违背了'散户无对倒能力'和'散户无算法拆单'的物理守恒定律，必须修正为量化。",
+      "evidence_chain": "dq_missing_trade_ratio(z=+4.45)；Amihud 非流动性指标(z=+4.41)；l1_swp_quote_sweep_ratio(z=+4.16)"
+    },
+    "601218.SH": {
+      "stock_code": "601218.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4509,
+        "量化": 0.3274,
+        "散户": 0.2216
+      },
+      "confidence_margin": 0.1235,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛处于边界(Margin=0.124)，经全量特征复审倾向于支撑游资假说。",
+      "evidence_chain": "l1_rs_volume_kurt(z=+3.85)；l1_rs_volume_skew(z=+3.83)；脉冲成交突发爆发率(z=+2.96)"
+    },
+    "603683.SH": {
+      "stock_code": "603683.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.436,
+        "量化": 0.3317,
+        "散户": 0.2323
+      },
+      "confidence_margin": 0.1042,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.104)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "买卖一档平均有效买卖价差(z=+9.87)；l1_wavg_spread_mid_ratio(z=+9.34)；l1_pd_return_kurt(z=+9.24)"
+    },
+    "603407.SH": {
+      "stock_code": "603407.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3942,
+        "量化": 0.2982,
+        "散户": 0.3076
+      },
+      "confidence_margin": 0.0866,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛处于边界(Margin=0.087)，经全量特征复审倾向于支撑游资假说。",
+      "evidence_chain": "l4_vol_high_ratio(z=-9.79)；enh_volatility_x_hhi(z=+8.88)；l1_limit_seal_upper_strength(z=+6.70)"
+    },
+    "688325.SH": {
+      "stock_code": "688325.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3121,
+        "量化": 0.2569,
+        "散户": 0.431
+      },
+      "confidence_margin": 0.1188,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.119)，调取全量特征后微观因果倾向于游资。",
+      "evidence_chain": "l4_trend_linear(z=-6.61)；l3_jump_max(z=+2.89)；撤单挂单成交比(z=+2.87)"
+    },
+    "688114.SH": {
+      "stock_code": "688114.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.2963,
+        "量化": 0.2609,
+        "散户": 0.4427
+      },
+      "confidence_margin": 0.1464,
+      "verdict": "OVERRIDDEN",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": false,
+      "override_reason": "初判散户违背微观结构物理定律。证据显示极高对倒清洗(l1_kl_doji_score Z=+2.69)与大单主动净成交(l1_od_active_big_ratio Z=+2.18)，散户缺乏统一意志与算法驱动能力，无法主导此类清洗。高撤单比(l1_cb_cancel_volume_ratio Z=+2.54)与高信息熵(l4_rand_symbol_entropy Z=+2.03)表明存在高频挂撤与算法随机化拆单行为，符合量化做市或套利特征。游资虽有大单，但缺乏突发脉冲与封板冲量，且熵值过高不符合游资集中攻击特征，故修正为量化。",
+      "evidence_chain": "l1_kl_doji_score(z=+2.69)；撤单挂单成交比(z=+2.54)；主买大单净成交比率(z=+2.18)"
+    },
+    "688023.SH": {
+      "stock_code": "688023.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3006,
+        "量化": 0.2539,
+        "散户": 0.4454
+      },
+      "confidence_margin": 0.1448,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛虽给出散户标签，但置信度边缘（0.1448）且规则质证提示微观因果倾向于游资。核心证据链符合游资物理定律：l2_amt_trend Z-Score高达+2.92，表明资金流呈爆发式脉冲增长，具备突发大单特征，这是散户不具备的主动定价权与冲量能力；l1_pi_open_30min_amount_pct Z-Score为-2.00，显示开盘半小时量能占比极低，符合游资“潜伏等待”或“尾盘突袭”而非散户全天分散交易的行为模式；l4_ofi_autocorr_lag1 显著为负（-2.39）排除了量化算法拆单产生的高频率订单簿自相关特征。综合看，这是典型的低波动铺垫后的大资金脉冲驱动，属于游资行为。",
+      "evidence_chain": "l2_amt_trend(z=+2.92)；l4_ofi_autocorr_lag1(z=-2.39)；l1_pi_open_30min_amount_pct(z=-2.00)"
+    },
+    "603985.SH": {
+      "stock_code": "603985.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3548,
+        "量化": 0.3112,
+        "散户": 0.3341
+      },
+      "confidence_margin": 0.0207,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.021)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_kl_doji_score(z=+2.69)；l1_kl_upper_shadow_ratio(z=+1.95)；l1_pd_max_drawdown(z=+1.76)"
+    },
+    "603681.SH": {
+      "stock_code": "603681.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.389,
+        "量化": 0.306,
+        "散户": 0.305
+      },
+      "confidence_margin": 0.083,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛处于边界(Margin=0.083)，经全量特征复审倾向于支撑游资假说。",
+      "evidence_chain": "l1_rs_volume_kurt(z=+4.35)；l1_rs_volume_skew(z=+4.19)；脉冲成交突发爆发率(z=+3.07)"
+    },
+    "600866.SH": {
+      "stock_code": "600866.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4343,
+        "量化": 0.3412,
+        "散户": 0.2245
+      },
+      "confidence_margin": 0.0931,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛置信度差距仅0.0931，处于边界状态，需人工介入。证据链中，尾部资金占比 (Z=+3.79) 与近10分钟资金占比 (Z=+2.56) 极度显著，符合游资“尾盘点火、集中突击”的物理定律；脉冲成交突发爆发率 (Z=+2.62) 与主动扫单率 (Z=-2.43) 相互印证，表明资金在尾盘以主动市价方式击穿卖单，具备强烈的主动定价权与进攻性。高频挂撤比率 (Z=+2.49) 虽高，但在尾盘扫单语境下可解释为扫单前的“虚晃一枪”或扫单引发的被动匹配，而非典型量化中高频对倒做市的特征。散户不具备此等集中性与主动定价权，故推翻模型模糊倾向，锁定为游资。",
+      "evidence_chain": "l1_pi_close_rush_amount_pct(z=+3.79)；l4_acf_volume_lag1(z=+3.19)；l1_rs_volume_kurt(z=+3.14)"
+    },
+    "688608.SH": {
+      "stock_code": "688608.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3264,
+        "量化": 0.3069,
+        "散户": 0.3667
+      },
+      "confidence_margin": 0.0403,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.040)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l4_fft_spectral_entropy(z=+3.56)；l1_pi_vwap_deviation(z=+3.16)；l1_od_price_deviation_mean(z=+2.98)"
+    },
+    "603733.SH": {
+      "stock_code": "603733.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4002,
+        "量化": 0.3155,
+        "散户": 0.2843
+      },
+      "confidence_margin": 0.0847,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.085)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "enh_burst_x_direction(z=+3.16)；l1_kl_amplitude(z=+2.70)；l1_pd_price_momentum(z=+2.25)"
+    },
+    "600590.SH": {
+      "stock_code": "600590.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4665,
+        "量化": 0.3155,
+        "散户": 0.2181
+      },
+      "confidence_margin": 0.151,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "微观物理守恒因果核验自洽，模型置信度高，予以确认。",
+      "evidence_chain": "l1_kl_upper_shadow_ratio(z=+1.51)；l1_ask_shape_mean(z=+1.42)；l1_txn_count_log(z=+1.33)"
+    },
+    "600665.SH": {
+      "stock_code": "600665.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.42,
+        "量化": 0.3039,
+        "散户": 0.2761
+      },
+      "confidence_margin": 0.1161,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "初筛模型虽标记为游资，但置信度边缘 (Margin=0.116) 且微观因果链呈现显著矛盾。证据显示 l1_obp_depth_decay_mean (+2.21) 与 l1_kl_doji_score (+2.69) 极值，结合 l1_obp_bid_skew_mean (+1.72) 表明买盘挂单深度异常增厚，这是典型的散户情绪化托单或非理性挂单行为，而非游资突袭。同时，l1_obp_imbalance_mean (-1.68) 与 l1_cb_cancel_imbalance (-1.47) 显示卖压主导及撤单失衡，说明买盘多为被动承接且伴随高频犹豫性撤单，缺乏游资必要的主动扫单脉冲与封板冲量。l2_amt_trend (-1.32) 确认量能衰竭。此‘深度厚但承接弱’的物理特征违背游资与量化的算法逻辑（量化需高频挂撤，游资需瞬间击穿），确认为散户主导的末端接盘与恐慌性挂单形态。",
+      "evidence_chain": "l1_kl_doji_score(z=+2.69)；盘口深度衰减斜率(z=+2.21)；l1_obp_bid_skew_mean(z=+1.72)"
+    },
+    "688006.SH": {
+      "stock_code": "688006.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3506,
+        "量化": 0.2708,
+        "散户": 0.3786
+      },
+      "confidence_margin": 0.028,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.028)，调取全量特征后微观因果倾向于游资。",
+      "evidence_chain": "l3_mat_seq_pattern_score(z=+2.37)；大单撤单金额占比(z=+1.54)；l2_amt_trend(z=+1.31)"
+    },
+    "603097.SH": {
+      "stock_code": "603097.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3076,
+        "量化": 0.2587,
+        "散户": 0.4337
+      },
+      "confidence_margin": 0.1261,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.126)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l4_ofi_autocorr_lag1(z=-2.53)；l1_kl_gap_ratio(z=-2.15)；l1_dc_sudden_change_ratio(z=-1.61)"
+    },
+    "600801.SH": {
+      "stock_code": "600801.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3348,
+        "量化": 0.2979,
+        "散户": 0.3673
+      },
+      "confidence_margin": 0.0325,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛虽指向散户，但置信度极低（Margin仅0.033），且微观因果特征强烈背离散户物理定律。证据显示：1. l3_mat_vol_clustering_acf (Z=+1.56) 揭示成交量序列存在显著自相关聚类，符合算法程序化交易的节奏特征；2. l4_trend_r_squared (Z=-1.27) 与 l4_rand_hurst_gain (Z=-0.99) 显示趋势拟合度低且Hurst指数异常，暗示波动具有反持续性或复杂算法噪音，而非散户的非理性单向追涨；3. l1_ask_shape_mean (Z=+1.14) 表明卖盘形状异常平整或特定形态，具备做市商或高频挂撤的痕迹；4. 大单撤单占比低 (Z=-0.97) 结合高聚类度，排除了典型游资‘脉冲式’大单封板与暴力撤单的特征。综合判断，该时段主导力量具备算法化、程序化特征，修正为量化。",
+      "evidence_chain": "l3_mat_vol_clustering_acf(z=+1.56)；l1_pi_open_30min_amount_pct(z=-1.51)；l4_trend_r_squared(z=-1.27)"
+    },
+    "600381.SH": {
+      "stock_code": "600381.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3731,
+        "量化": 0.3054,
+        "散户": 0.3214
+      },
+      "confidence_margin": 0.0517,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "尽管模型初筛为游资，但微观因果链强烈否定游资特征。证据显示 l1_ap_big_net_inflow Z-Score=-3.14，表明缺乏游资必备的主动大单净流入与脉冲式买盘，违背‘游资必有突发大单’的物理定律。同时，l1_micro_concentration_top10 Z-Score=+3.11 与 l2_time_hhi Z-Score=+2.92 显示资金极度分散，无单一主力控盘痕迹。dq_missing_trade_ratio Z-Score=+3.78 暗示交易稀疏或流动性断层，结合 l1_micro_price_impact_elasticity Z-Score=+3.09（价格对成交的敏感度极高），说明缺乏深度买单支撑，微小卖压即可大幅压低价格，这是典型散户主导、流动性不足的市场特征。此外，l1_rs_top10_volume_pct Z-Score=+2.99 和 l1_micro_hhi_30min Z-Score=+2.86 进一步证实成交在时间和价格维度上高度碎片化，符合散户无序交易、无算法拆单规律的特征。初查结论正确，终审修正为散户。",
+      "evidence_chain": "dq_missing_trade_ratio(z=+3.78)；l1_ap_big_net_inflow(z=-3.14)；l1_micro_concentration_top10(z=+3.11)"
+    },
+    "601009.SH": {
+      "stock_code": "601009.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4182,
+        "量化": 0.3178,
+        "散户": 0.264
+      },
+      "confidence_margin": 0.1004,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.100)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_pd_up_ratio(z=-1.44)；l1_amount_total_log(z=-1.39)；总撤单笔数占比(z=-1.35)"
+    },
+    "688297.SH": {
+      "stock_code": "688297.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3245,
+        "量化": 0.2725,
+        "散户": 0.4031
+      },
+      "confidence_margin": 0.0786,
+      "verdict": "OVERRIDDEN",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": false,
+      "override_reason": "模型初判散户置信度仅0.4031，且Margin差距极小，处于模糊区。然而，微观证据显示l3_cancel_mean、主买大单净成交比率及撤单挂单成交比均呈现显著正向Z-Score（>2.0）。根据物理守恒定律，散户缺乏算法执行能力，无法产生高频撤单、对倒清洗及维持极高的主动大单净成交比率。这种‘高撤单+高对倒+高主动大单’的组合是典型的高频量化策略特征（如做市或套利拆单），与游资的突发脉冲式行为不符，故修正为主力量化。",
+      "evidence_chain": "l3_cancel_mean(z=+2.57)；主买大单净成交比率(z=+2.46)；撤单挂单成交比(z=+2.24)"
+    },
+    "600448.SH": {
+      "stock_code": "600448.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4611,
+        "量化": 0.3218,
+        "散户": 0.2171
+      },
+      "confidence_margin": 0.1393,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛置信度不足（Margin=0.1393），且规则初裁提示微观因果倾向于散户。物理证据方面：1. 缺乏游资特征：未见突发大单脉冲或封板冲量相关的显著离群值，盘口深度衰减斜率（Z=+1.48）显示深度流失平缓而非剧烈冲击；2. 缺乏量化特征：虽然量化小单占比（l1_quant_small_pct, Z=+1.52）略高，但缺乏高频挂撤（cancel_imbalance, Z=-1.21 显示撤单不平衡不显著）或算法拆单的典型序列模式，随机性指标（l4_rand_serial_corr, Z=-1.39）显示序列相关性为负，不符合量化交易通常追求的低噪声或特定周期性的算法行为，反而更接近市场摩擦噪声；3. 散户特征吻合：买盘偏斜均值（l1_obp_bid_skew_mean, Z=-1.99）显著为负，表明买方力量薄弱且分散，存在被动等待心理；价格波动标准差（l1_pd_return_std, Z=+1.58）偏高，暗示价格由分散的非理性情绪驱动而非算法平滑。综合判断，该时段主导力量为散户的非协同性交易。",
+      "evidence_chain": "l1_obp_bid_skew_mean(z=-1.99)；l1_pd_return_std(z=+1.58)；l3_mat_seq_pattern_score(z=+1.57)"
+    },
+    "603315.SH": {
+      "stock_code": "603315.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.375,
+        "量化": 0.2788,
+        "散户": 0.3462
+      },
+      "confidence_margin": 0.0288,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛置信度不足（Margin=0.0288），且微观特征证据链明确指向量化资金行为。首先，l3_mat_seq_pattern_score (Z=+1.17) 与 l3_mat_vol_clustering_acf (Z=-1.01) 显示L3逐笔委托中存在高度序列规律性且波动聚集度降低，符合算法程序化拆单与平滑交易特征；其次，l3_jump_max (Z=+1.31) 配合 l1_kl_gap_ratio (Z=+1.53) 表明盘口跳变与开平差异常显著，这是高频做市或套利策略在流动性枯竭时的典型表现；再次，l1_cb_big_cancel_amount_pct (Z=-1.27) 显示大单撤单占比低于均值，排除了游资典型的“幌骗”或大额虚假挂单策略；最后，l4_rand_hurst_gain (Z=-0.99) 表明资金流具有显著的反持续性（均值回归），这是量价模型高频调仓的典型特征，而非游资的趋势加速或散户的随机游走。综合物理守恒定律，缺乏游资所需的突发脉冲与封板冲量，且具备高频挂撤与算法规律性，故修正为量化。",
+      "evidence_chain": "l1_kl_gap_ratio(z=+1.53)；l3_jump_max(z=+1.31)；大单撤单金额占比(z=-1.27)"
+    },
+    "688659.SH": {
+      "stock_code": "688659.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3107,
+        "量化": 0.2606,
+        "散户": 0.4288
+      },
+      "confidence_margin": 0.1181,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初判'散户'置信度0.4288，虽处于边界(Margin=0.118)，但微观证据强力支持散户特征：1. 大单撤单金额占比(Z=-1.53)与主力大单成交金额占比(Z=-1.52)显著偏低，违背游资'突发大单脉冲'与'对倒清洗'的物理定律，排除游资主导；2. 虽拆单熵(Z=+1.69)与量化小单占比(Z=+1.74)偏高，看似支持量化，但盘口深度衰减斜率(Z=-1.62)显示深度流动性缺失，且量化中立性指标(Z=+1.47)表明并无显著的高频算法中性交易痕迹，量化缺乏'高频挂撤'或'对倒做市'的典型高频交互特征；3. 综合来看，低大单参与度配合高被动小单占比，符合散户主导的'流动性提供者缺失'状态，模型初筛结论经得起物理定律质证，维持散户判定。",
+      "evidence_chain": "l1_cb_cancel_imbalance(z=-2.62)；l1_quant_small_pct(z=+1.74)；算法拆单周期相似度(拆单熵)(z=+1.69)"
+    },
+    "600079.SH": {
+      "stock_code": "600079.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3883,
+        "量化": 0.3414,
+        "散户": 0.2704
+      },
+      "confidence_margin": 0.0469,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.047)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_dc_sudden_change_ratio(z=+2.18)；主力大单成交金额占比(z=+2.11)；闪烁撤单率(<500毫秒)(z=-2.05)"
+    },
+    "603636.SH": {
+      "stock_code": "603636.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4336,
+        "量化": 0.2831,
+        "散户": 0.2832
+      },
+      "confidence_margin": 0.1504,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": false,
+      "override_reason": "微观物理守恒因果核验自洽，模型置信度高，予以确认。",
+      "evidence_chain": "l4_depth_change_cv(z=+5.68)；l1_dc_bid_change_max(z=+4.66)；l1_pi_close_rush_amount_pct(z=+4.24)"
+    },
+    "688349.SH": {
+      "stock_code": "688349.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3391,
+        "量化": 0.3164,
+        "散户": 0.3445
+      },
+      "confidence_margin": 0.0053,
+      "verdict": "OVERRIDDEN",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": false,
+      "override_reason": "模型初判为散户（置信度0.3445），但Margin极低（0.0053），且规则初查已提示OVERRIDDEN。微观结构证据显示l3_cancel_mean (Z=+2.51)与总撤单笔数占比 (Z=+1.74)极高，表明存在高频挂撤行为，这是量化算法做市或高频交易的典型特征，散户缺乏如此规模的程序化撤单能力。同时，主买大单净成交比率 (Z=+2.05)与大单撤单金额占比 (Z=+1.63) 的背离，揭示了“对倒清洗”现象：大单在盘面上看似主动成交，实则伴随高比例撤单，符合量化策略中利用算法拆单、试探流动性并制造虚假成交量的物理定律。散户不具备这种主动定价权及对倒清洗能力，游资通常表现为突发脉冲而非如此高频的撤单噪音。因此，依据物理守恒原则，判定为主力量化。",
+      "evidence_chain": "l3_cancel_mean(z=+2.51)；l1_pd_return_skew(z=-2.46)；主买大单净成交比率(z=+2.05)"
+    },
+    "601952.SH": {
+      "stock_code": "601952.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4128,
+        "量化": 0.2721,
+        "散户": 0.3152
+      },
+      "confidence_margin": 0.0976,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.098)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "主动买盘OFI正向比率(z=+3.72)；l1_ap_sweep_ratio(z=+2.23)；l4_ofi_autocorr_lag1(z=-1.51)"
+    },
+    "600316.SH": {
+      "stock_code": "600316.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3935,
+        "量化": 0.2906,
+        "散户": 0.3159
+      },
+      "confidence_margin": 0.0776,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛处于边界(Margin=0.078)，经全量特征复审倾向于支撑游资假说。",
+      "evidence_chain": "l1_pi_close_rush_amount_pct(z=+2.14)；enh_cancel_x_close(z=+1.96)；l3_mat_vol_clustering_acf(z=+1.59)"
+    },
+    "601890.SH": {
+      "stock_code": "601890.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4537,
+        "量化": 0.3077,
+        "散户": 0.2386
+      },
+      "confidence_margin": 0.146,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛虽指向游资，但置信度低且规则初查已提示倾向散户。核心证据链显示缺乏游资必备的物理特征：l1_pd_price_jump_max Z-Score为-1.54，表明无突发大单脉冲或价格跳变；l3_mat_seq_pattern_score Z-Score为+1.57，暗示订单序列存在非算法化的随机性（散户特征），而非量化的高频拆单或规律性对倒。同时，l1_obpi_mean (+1.99) 与 l1_obp_bid_skew_mean (-1.98) 形成强烈反向背离，显示买盘挂单压力巨大但实际成交偏向卖盘或挂单被动，符合散户‘挂单等待、成交滞后’的心理定式，而非游资的主动扫货。综合微观因果，资金行为更符合散户群体性跟风或分歧博弈，而非机构或游资的定向操作。",
+      "evidence_chain": "l1_obpi_mean(z=+1.99)；l1_obp_bid_skew_mean(z=-1.98)；l3_mat_seq_pattern_score(z=+1.57)"
+    },
+    "688777.SH": {
+      "stock_code": "688777.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3572,
+        "量化": 0.2643,
+        "散户": 0.3785
+      },
+      "confidence_margin": 0.0213,
+      "verdict": "OVERRIDDEN",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": false,
+      "override_reason": "初筛模型因Z-score分布边缘化误判为散户，但微观结构证据违背散户物理定律：1. 散户无算法拆单与对倒清洗能力，但特征显示'主买大单净成交比率'Z=+2.41及'极高对倒清洗'，具备做市商或套利引擎特征；2. '散户小单成交笔数占比'Z=-2.54表明小单占比极低，主导权在大单算法；3. 'L2闪撤总量'Z=+2.18与'FFT频谱熵'Z=+2.56揭示高频挂撤策略与信号噪声，符合量化高频交易指纹；4. 'L1价格动量'Z=-2.71与'最大回撤'Z=+3.18结合，显示在剧烈波动中通过算法挂单进行流动性提供而非单边追涨，排除游资脉冲式打法。",
+      "evidence_chain": "l1_pd_max_drawdown(z=+3.18)；l1_pd_price_momentum(z=-2.71)；l1_kl_close_return(z=-2.71)"
+    },
+    "600718.SH": {
+      "stock_code": "600718.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3994,
+        "量化": 0.3009,
+        "散户": 0.2998
+      },
+      "confidence_margin": 0.0985,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛置信度差距仅0.0985，处于模糊区间，需结合微观因果进行修正。观察显著离群特征：l4_acf_volume_lag1（+0.92）与l4_rand_hurst_gain（-0.99）表明日内成交量存在正向自相关且价格路径呈现反持续性（Hurst指数偏低），这是算法交易（高频/中频）典型的统计套利与均值回归特征，非游资的脉冲式突破或散户的随机游走。同时，l1_pd_price_jump_max（-0.92）显示缺乏极端跳空或剧烈脉冲，排除了游资利用大单冲击流动性制造跳空的传统手法；l1_obp_bid_skew_mean（-1.35）暗示买盘挂单结构非典型的人气抢筹，更符合量化做市或流动性提供的被动挂单特征。综合“无大单脉冲、有高频自相关、反持续路径”三点，物理定律指向量化资金主导。",
+      "evidence_chain": "l1_obp_bid_skew_mean(z=-1.35)；l2_amt_trend(z=+1.33)；l1_kl_lower_shadow_ratio(z=+1.28)"
+    },
+    "600568.SH": {
+      "stock_code": "600568.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.3911,
+        "量化": 0.3197,
+        "散户": 0.2892
+      },
+      "confidence_margin": 0.0714,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": true,
+      "override_reason": "物理守恒定律质证：微观离群特征中，Amihud非流动性指标(Z=+6.02)、微观价格冲击弹性(Z=+5.13)、缺失交易比例(Z=+4.70)以及报价扫单比(Z=+4.54)显著飙升，揭示了极端的流动性真空与极高的市场摩擦成本。这类高频微观结构下的极端被动性与价格脆弱性，与散户缺乏主动定价权、被动承接且对微观震荡极度敏感的物理属性完全吻合。相比之下，游资的突发脉冲与封板冲量、量化的算法拆单做市均无法在如此高流动性损耗的环境下持续运作。",
+      "evidence_chain": "Amihud 非流动性指标(z=+6.02)；l1_micro_price_impact_elasticity(z=+5.13)；dq_missing_trade_ratio(z=+4.70)"
+    },
+    "688081.SH": {
+      "stock_code": "688081.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.2983,
+        "量化": 0.257,
+        "散户": 0.4447
+      },
+      "confidence_margin": 0.1465,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛为散户但Margin仅0.1465且初查已提示微观因果倾向量化，需独立反思。证据链显示 l1_rs_split_similarity (拆单周期相似度) Z-Score +1.47，符合量化算法拆单特征；l1_dc_sudden_change_ratio (突变率) Z-Score +2.60 与 l1_obpi_mean (订单簿压力指数) Z-Score -2.02 背离，暗示非自然散户买卖，而是算法对倒或高频挂撤清洗；l1_avg_trade_size_log Z-Score -1.49 表明单笔成交极小，符合量化拆单碎片化特征；l1_pi_close_10min_amount_pct 与 l1_pi_close_rush_amount_pct 双高 (Z-Score +1.50/+1.43) 显示尾盘资金密集突击，符合量化收盘套利或做市策略。散户缺乏对倒清洗能力与算法拆单规律，游资缺乏突发大单脉冲 (大单特征缺失)，故推翻散户初判，确认为量化。",
+      "evidence_chain": "l1_dc_sudden_change_ratio(z=+2.60)；l1_obpi_mean(z=-2.02)；l1_pd_return_skew(z=+1.65)"
+    },
+    "688778.SH": {
+      "stock_code": "688778.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3364,
+        "量化": 0.2493,
+        "散户": 0.4143
+      },
+      "confidence_margin": 0.0779,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初判为散户，但Z-Score证据强烈指向量化：高撤单挂单成交比(+2.51)和高撤单笔数占比(+1.85)符合量化高频挂撤特征；委托符号序列信息熵(+1.61)表明交易指令具有随机性与算法拆单特征；主动买盘OFI正向比率(+2.27)与大单净成交比率(+1.80)并存，显示具备主动定价权与对倒清洗能力，违背散户物理定律；游资虽有大单，但缺乏封板冲量且信息熵偏高，更契合量化算法交易特征。",
+      "evidence_chain": "撤单挂单成交比(z=+2.51)；主动买盘OFI正向比率(z=+2.27)；总撤单笔数占比(z=+1.85)"
+    },
+    "600900.SH": {
+      "stock_code": "600900.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4186,
+        "量化": 0.3245,
+        "散户": 0.2569
+      },
+      "confidence_margin": 0.0942,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "游资",
+      "tier2_full_features_expanded": true,
+      "override_reason": "初筛模型虽处于边界（Margin=0.0942），但微观特征证据链高度符合游资物理定律。首先，成交时间间隔变异系数（Z=+2.35）与突发最大burst（Z=+2.12）显著为正，表明资金介入具有极高的非线性突发特征，排除了量化算法拆单（通常间隔均匀）和散户自发交易（随机性高但无极端burst）的可能。其次，收盘前10分钟成交额占比（Z=+2.12）与超大单占比（Z=+1.87）双高，且伴随累计净买入冲量（Z=+1.58）为正，符合游资尾盘抢筹、锁定封板或次日溢价预期的典型行为模式。虽撤单笔数占比（Z=-1.82）偏低，但这可能源于游资挂单坚决、较少反复试探，而非量化高频挂撤。价格跳跃次数（Z=+1.54）亦支持主动性买盘打破均衡的推测。综上，全量特征复审强力支撑游资假说，故维持初判。",
+      "evidence_chain": "成交时间间隔变异系数(z=+2.35)；l3_burst_max(z=+2.12)；l1_pi_close_10min_amount_pct(z=+2.12)"
+    },
+    "600067.SH": {
+      "stock_code": "600067.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4475,
+        "量化": 0.3336,
+        "散户": 0.219
+      },
+      "confidence_margin": 0.1139,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛倾向游资，但微观证据严重违背游资物理定律。游资核心特征为‘突发大单脉冲’与‘高频对倒清洗’，但证据显示：1. 算法拆单熵 Z=-2.19（极度低熵），表明交易行为具有极高的算法周期性，非人为冲动交易；2. 盘口深度衰减斜率 Z=+2.29 且买卖压力不平衡 Z=-1.54，显示卖盘挂单密集而买盘稀薄，这是量化做市商典型的‘挂单诱多/被动成交’特征，而非游资的主动扫货；3. 成交量集中于 Top5/10 席位（Z>1.7）且微观集中度偏高，但结合低拆单熵，更符合高频算法在特定价位区间进行‘薄盘口高频剥头皮’或‘订单簿流动性提供’的行为，而非游资的‘封板冲量’。边际置信度 0.114 处于模糊区，物理证据支持量化修正。",
+      "evidence_chain": "盘口深度衰减斜率(z=+2.29)；算法拆单周期相似度(拆单熵)(z=-2.19)；l1_rs_top5_volume_pct(z=+1.95)"
+    },
+    "600203.SH": {
+      "stock_code": "600203.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.439,
+        "量化": 0.3203,
+        "散户": 0.2408
+      },
+      "confidence_margin": 0.1187,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "【特征初裁】模型初筛置信度不足(Margin=0.119)，调取全量特征后微观因果倾向于量化。",
+      "evidence_chain": "l1_kl_gap_ratio(z=-1.76)；l1_ask_shape_mean(z=+1.33)；l4_acf_volume_lag1(z=-1.32)"
+    },
+    "688275.SH": {
+      "stock_code": "688275.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.3277,
+        "量化": 0.2569,
+        "散户": 0.4154
+      },
+      "confidence_margin": 0.0876,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "初筛判定为散户但Margin极低且规则提示微观因果倾向量化。质证发现：1.散户小单成交占比Z=-2.06（显著低于均值，说明并非典型散户碎片化成交主导）；2.算法拆单相似度Z=+1.60（高相似度表明存在周期性、规律性的订单拆分行为，符合算法执行特征）；3.平均成交单量对数Z=-1.57（单均较小且均匀，符合量化拆单特征）；4.随机序列自相关Z=+1.47（成交时序存在规律性，非散户随机行为）；5.量价趋势Z=+1.40（稳定趋势伴随高频交易）。散户无法产生如此低熵的拆单行为和稳定的时序自相关性，违背散户无主动定价权与算法能力的物理定律。",
+      "evidence_chain": "散户小单成交笔数占比(z=-2.06)；l1_kl_body_ratio(z=+1.76)；算法拆单周期相似度(拆单熵)(z=+1.60)"
+    },
+    "688819.SH": {
+      "stock_code": "688819.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.311,
+        "量化": 0.2668,
+        "散户": 0.4222
+      },
+      "confidence_margin": 0.1113,
+      "verdict": "OVERRIDDEN",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": false,
+      "override_reason": "模型初判散户违背物理定律。证据显示l3_cancel_mean高达Z+4.47，伴随高撤单挂单成交比(Z+2.12)及大单撤单占比(Z+1.62)，且主买大单净成交比率显著(Z+2.14)。散户不具备高频撤单操控力与大单对倒清洗能力。高撤单与成交比的结合，以及算法序列得分(Z+1.97)的支撑，符合量化资金利用算法拆单、高频挂撤进行流动性制造与洗盘的特征，故修正为量化。",
+      "evidence_chain": "l3_cancel_mean(z=+4.47)；主买大单净成交比率(z=+2.14)；撤单挂单成交比(z=+2.12)"
+    },
+    "600986.SH": {
+      "stock_code": "600986.SH",
+      "ml_init_type": "游资",
+      "ml_probabilities": {
+        "游资": 0.4421,
+        "量化": 0.3353,
+        "散户": 0.2226
+      },
+      "confidence_margin": 0.1067,
+      "verdict": "ARBITRATED",
+      "final_capital_type": "量化",
+      "tier2_full_features_expanded": true,
+      "override_reason": "模型初筛判为游资，但Z-Score证据链强烈违背游资物理定律。游资需具备高R方趋势性（l4_trend_r_squared应偏高）与序列矩阵模式（l3_mat_seq_pattern_score应偏高），但此处l4_trend_r_squared为-1.61（逆势/无序）且l3_mat_seq_pattern_score为-1.22（缺乏连贯矩阵逻辑），同时l1_dc_sudden_change_ratio高达+1.96，显示订单流在微观时间轴上发生剧烈结构性突变而非持续冲量。结合高成交量（+1.50）与高交易笔数（+1.22），符合量化策略在日内高频挂撤、对倒做市或算法拆单导致的‘量增笔增但趋势混沌’特征，故修正为量化。",
+      "evidence_chain": "l1_dc_sudden_change_ratio(z=+1.96)；l4_trend_r_squared(z=-1.61)；l1_volume_total_log(z=+1.50)"
+    },
+    "688283.SH": {
+      "stock_code": "688283.SH",
+      "ml_init_type": "散户",
+      "ml_probabilities": {
+        "游资": 0.2871,
+        "量化": 0.2517,
+        "散户": 0.4612
+      },
+      "confidence_margin": 0.1741,
+      "verdict": "CONFIRMED",
+      "final_capital_type": "散户",
+      "tier2_full_features_expanded": false,
+      "override_reason": "微观物理守恒因果核验自洽，模型置信度高，予以确认。",
+      "evidence_chain": "l4_ofi_autocorr_lag1(z=-3.80)；l3_cancel_mean(z=+3.06)；l1_kl_doji_score(z=+2.69)"
+    }
+  }
+}
